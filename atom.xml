@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://weixiaojian.github.io</id>
-    <title>兰皋的个人博客</title>
-    <updated>2020-05-14T02:21:45.778Z</updated>
+    <title>兰皋的博客</title>
+    <updated>2020-05-14T06:33:30.057Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://weixiaojian.github.io"/>
     <link rel="self" href="https://weixiaojian.github.io/atom.xml"/>
     <subtitle>生活乐于分享</subtitle>
     <logo>https://weixiaojian.github.io/images/avatar.png</logo>
     <icon>https://weixiaojian.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, 兰皋的个人博客</rights>
+    <rights>All rights reserved 2020, 兰皋的博客</rights>
     <entry>
         <title type="html"><![CDATA[Java23种设计模式]]></title>
         <id>https://weixiaojian.github.io/post/hello-java/</id>
