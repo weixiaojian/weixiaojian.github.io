@@ -9,14 +9,14 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="kveln">
-  <title>知行合一 | 兰皋的博客</title>
+  <title>mysql中case when使用 | 兰皋的博客</title>
   <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- <link href="https://weixiaojian.github.io/media/css/bootstrap.min.css" rel="stylesheet"> -->
   <!--  <link href="https://weixiaojian.github.io/media/css/all.min.css" rel="stylesheet" type="text/css"> -->
   <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-  <link rel="alternate" type="application/rss+xml" title="知行合一 | 兰皋的博客 » Feed" href="https://weixiaojian.github.io/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="mysql中case when使用 | 兰皋的博客 » Feed" href="https://weixiaojian.github.io/atom.xml">
   <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
   <link href="https://weixiaojian.github.io/styles/main.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -25,8 +25,8 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
 
-    <meta property="og:description" content="知行合一"/>
-    <meta property="og:url" content="https://weixiaojian.github.io/post/about/"/>
+    <meta property="og:description" content="mysql中case when使用"/>
+    <meta property="og:url" content="https://weixiaojian.github.io/post/mysql-zhong-case-when-shi-yong/"/>
     <meta property="og:locale" content="zh-CN"/>
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="兰皋的博客"/>
@@ -81,7 +81,7 @@
           	<span class="tags">
           	 
         </span>
-            <h1>知行合一</h1>
+            <h1>mysql中case when使用</h1>
             <span class="meta">
             	Posted on
               2020-05-15，1 min read
@@ -97,13 +97,43 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <p><img src="http://123.56.104.175//upload/2019/09/u9b1okdqnag9aqbjb3cu9gg214.jpg" alt="cmd-markdown-logo" title=""  style="width:230px; height:230px; border-radius:50%; "/></p>
-<h3 id="关于我">关于我</h3>
-<p>我叫魏健，是一名Java程序员，现阶段的主要从事Java开发，对Java/Spring/Docker有极大的兴趣 欢迎一起学习</p>
-<h3 id="关于本博客">关于本博客</h3>
-<p>本博客基于Gridea + GitHub搭建 主要是一个学习博客，生活乐于分享。</p>
+          <h3 id="case-when使用场景">case when使用场景</h3>
+<ul>
+<li>等值转换<br>
+常见于数据库中使用0|1来代替性别，select时直接使用case when即可转换为中文</li>
+</ul>
+<pre><code>SELECT name,
+(case sex when 1 then '男' when 0 then'女' end) as sex
+from student;
+</code></pre>
+<ul>
+<li>范围转换<br>
+例如：照用户成绩显示优（90+）、良（80-90）、及格（60-80）、未及格（60-）</li>
+</ul>
+<pre><code>SELECT name,
+(case when score&gt;=100 then '优秀' when score&gt;=90 then '一般' end) as score
+from student;
+</code></pre>
+<ul>
+<li>列行转换<br>
+例如：二的基础上一个学生多个课程数据</li>
+</ul>
+<pre><code>SELECT name
+,max(case course when '语文' then score else 0 end) as '语文'
+,max(case course when '数学' then score else 0 end) as '数学'
+,max(case course when '英语' then score else 0 end) as '英语'
+from student group by name;
+</code></pre>
 
           
+          <p class="next-post">下一篇：
+            <a href="https://weixiaojian.github.io/post/hello-java/">
+              <span class="post-title">
+                Java23种设计模式&rarr;
+              </span>
+            </a>
+          </p>
+        
         <div class="comment">
           
         </div>

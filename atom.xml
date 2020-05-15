@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://weixiaojian.github.io</id>
     <title>兰皋的博客</title>
-    <updated>2020-05-14T06:36:13.577Z</updated>
+    <updated>2020-05-15T01:22:52.315Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://weixiaojian.github.io"/>
     <link rel="self" href="https://weixiaojian.github.io/atom.xml"/>
@@ -10,6 +10,41 @@
     <logo>https://weixiaojian.github.io/images/avatar.png</logo>
     <icon>https://weixiaojian.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 兰皋的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[mysql中case when使用]]></title>
+        <id>https://weixiaojian.github.io/post/mysql-zhong-case-when-shi-yong/</id>
+        <link href="https://weixiaojian.github.io/post/mysql-zhong-case-when-shi-yong/">
+        </link>
+        <updated>2020-05-15T01:22:07.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="case-when使用场景">case when使用场景</h3>
+<ul>
+<li>等值转换<br>
+常见于数据库中使用0|1来代替性别，select时直接使用case when即可转换为中文</li>
+</ul>
+<pre><code>SELECT name,
+(case sex when 1 then '男' when 0 then'女' end) as sex
+from student;
+</code></pre>
+<ul>
+<li>范围转换<br>
+例如：照用户成绩显示优（90+）、良（80-90）、及格（60-80）、未及格（60-）</li>
+</ul>
+<pre><code>SELECT name,
+(case when score&gt;=100 then '优秀' when score&gt;=90 then '一般' end) as score
+from student;
+</code></pre>
+<ul>
+<li>列行转换<br>
+例如：二的基础上一个学生多个课程数据</li>
+</ul>
+<pre><code>SELECT name
+,max(case course when '语文' then score else 0 end) as '语文'
+,max(case course when '数学' then score else 0 end) as '数学'
+,max(case course when '英语' then score else 0 end) as '英语'
+from student group by name;
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java23种设计模式]]></title>
         <id>https://weixiaojian.github.io/post/hello-java/</id>
