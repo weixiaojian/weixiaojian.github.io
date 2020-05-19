@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://weixiaojian.github.io</id>
     <title>兰皋的博客</title>
-    <updated>2020-05-15T01:23:56.074Z</updated>
+    <updated>2020-05-19T10:18:59.672Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://weixiaojian.github.io"/>
     <link rel="self" href="https://weixiaojian.github.io/atom.xml"/>
@@ -10,6 +10,244 @@
     <logo>https://weixiaojian.github.io/images/avatar.png</logo>
     <icon>https://weixiaojian.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 兰皋的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[数组]]></title>
+        <id>https://weixiaojian.github.io/post/shu-zu/</id>
+        <link href="https://weixiaojian.github.io/post/shu-zu/">
+        </link>
+        <updated>2020-05-19T10:18:39.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="数组">数组</h1>
+<blockquote>
+<p>将数据码成一排进行存放</p>
+</blockquote>
+<ul>
+<li>索引从0开始，通过索引访问</li>
+<li>定义<code>int[] arr = new int[20];</code></li>
+<li>通过索引访问、修改、删除</li>
+</ul>
+<h2 id="自定义动态数组">自定义动态数组</h2>
+<h3 id="构造方法">构造方法</h3>
+<pre><code>/**
+ * 自定义动态数组
+ * @author langao_q
+ * @create 2020-05-19 15:34
+ */
+public class Array&lt;E&gt; {
+    private E[] data;
+    private int size;
+
+    /**
+     * 默认的构造函数，初始化长度为10
+     */
+    public Array(){
+        this(10);
+    }
+
+    /**
+     * 构造函数，传入的是数组的容量capacity构造Array
+     * 此处数组类型不能指定为E泛型，泛型是从JDK1.5后才开始支持
+     * @param capacity
+     */
+    public Array(int capacity){
+        data = (E[]) new Object[capacity];
+        size = 0;
+    }
+</code></pre>
+<h3 id="获取方法">获取方法</h3>
+<pre><code>    /**
+     * 获取数组的大小
+     * @return
+     */
+    public int getSize(){
+        return size;
+    }
+
+    /**
+     * 获取数组的最大容量
+     * @return
+     */
+    public int getCapacity(){
+        return data.length;
+    }
+
+    /**
+     * 数组是否为空
+     * @return
+     */
+    public boolean isEmpty(){
+        return size==0;
+    }
+    
+    /**
+     * 获取指定位置元素
+     * @param index
+     * @return
+     */
+    public E get(int index){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        return data[index];
+    }
+
+    /**
+     * 更新指定位置的元素
+     * @param index
+     * @param e
+     */
+    public void set(int index, E e){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        data[index] = e;
+    }
+
+    /**
+     * 校验某个元素是否存在
+     * @param e
+     * @return
+     */
+    public boolean contains(E e){
+        for (int i = 0; i &lt; size; i++) {
+            if(data[i].equals(e)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 查找指定元素的索引
+     * @param e
+     * @return
+     */
+    public int find(E e){
+        for (int i = 0; i &lt; size; i++) {
+            if(data[i].equals(e)){
+                return i;
+            }
+        }
+        return -1;
+    }
+</code></pre>
+<h3 id="添加方法">添加方法</h3>
+<pre><code>    /**
+     * 向数组头添加一个元素
+     * @param e
+     */
+    public void addFirst(E e){
+        add(0, e);
+    }
+
+    /**
+     * 向数组末尾添加元素
+     * @param e
+     */
+    public void addLast(E e){
+        add(size, e);
+    }
+
+    /**
+     * 向指定位置插入元素
+     * @param index
+     * @param e
+     */
+    public void add(int index, E e){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        if(size == data.length){
+            resize(size * 2);
+        }
+        //把index位置后的每一个元素向后挪动一位
+        for (int i = size -1; i &gt;= index; i--) {
+            data[i+1] = data[i];
+        }
+
+        data[index] = e;
+        size ++;
+    }
+</code></pre>
+<h3 id="删除方法">删除方法</h3>
+<pre><code>    /**
+     * 删除第一个元素
+     * @return
+     */
+    public E removeFirst(){
+        return remove(0);
+    }
+
+    /**
+     * 删除最后一个元素
+     * @return
+     */
+    public E removeLast(){
+        return remove(size - 1);
+    }
+
+    /**
+     * 删除指定元素
+     * @param e
+     */
+    public boolean removeElement(E e){
+        int index = find(e);
+        if(index != -1){
+            remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除指定位置的元素
+     * @param index
+     * @return
+     */
+    public E remove(int index){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        E result = data[index];
+        //把index后的每一个元素 都向左移动一位
+        for (int i = index+1; i &lt; size ; i++) {
+            data[i-1] = data[i];
+        }
+        size --;
+        //loitering objects
+        data[size] = null;
+        if(size == data.length/2){
+            resize(data.length/2);
+        }
+        return result;
+    }
+</code></pre>
+<h3 id="扩容方法">扩容方法</h3>
+<pre><code>    /**
+     * 数组扩容 每次size * 2
+     * @param newCapacity
+     */
+    private void resize(int newCapacity){
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i &lt; size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Array{&quot; +
+                &quot;data=&quot; + Arrays.toString(data) +
+                &quot;, size=&quot; + size +
+                &quot;, capacity=&quot; + data.length +
+                '}';
+    }
+</code></pre>
+<h3 id="测试与源代码">测试与源代码</h3>
+<p><a href="https://github.com/weixiaojian/data-structure/blob/master/src/io/imwj/array/Array.java">源代码 Array.java</a><br>
+<a href="https://github.com/weixiaojian/data-structure/blob/master/src/io/imwj/array/ArrayMain.java">测试 ArrayMain.java</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[mysql中case when使用]]></title>
         <id>https://weixiaojian.github.io/post/mysql-zhong-case-when-shi-yong/</id>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>数组 | 兰皋的博客</title>
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="https://weixiaojian.github.io/media/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!--  <link href="https://weixiaojian.github.io/media/css/all.min.css" rel="stylesheet" type="text/css"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="数组 | 兰皋的博客 » Feed" href="https://weixiaojian.github.io/atom.xml">
+  <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+  <link href="https://weixiaojian.github.io/styles/main.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/highlight.min.js"></script>
+  <!-- <script src="https://weixiaojian.github.io/media/scripts/jquery.min.js"></script> -->
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+    <meta property="og:description" content="数组"/>
+    <meta property="og:url" content="https://weixiaojian.github.io/post/shu-zu/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="兰皋的博客"/>
+  </head>
+  <body>
+  	<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://weixiaojian.github.io">兰皋的博客</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/post/about">关于</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://weixiaojian.github.io/media/images/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+          	<span class="tags">
+          	 
+        </span>
+            <h1>数组</h1>
+            <span class="meta">
+            	Posted on
+              2020-05-19，4 min read
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h1 id="数组">数组</h1>
+<blockquote>
+<p>将数据码成一排进行存放</p>
+</blockquote>
+<ul>
+<li>索引从0开始，通过索引访问</li>
+<li>定义<code>int[] arr = new int[20];</code></li>
+<li>通过索引访问、修改、删除</li>
+</ul>
+<h2 id="自定义动态数组">自定义动态数组</h2>
+<h3 id="构造方法">构造方法</h3>
+<pre><code>/**
+ * 自定义动态数组
+ * @author langao_q
+ * @create 2020-05-19 15:34
+ */
+public class Array&lt;E&gt; {
+    private E[] data;
+    private int size;
+
+    /**
+     * 默认的构造函数，初始化长度为10
+     */
+    public Array(){
+        this(10);
+    }
+
+    /**
+     * 构造函数，传入的是数组的容量capacity构造Array
+     * 此处数组类型不能指定为E泛型，泛型是从JDK1.5后才开始支持
+     * @param capacity
+     */
+    public Array(int capacity){
+        data = (E[]) new Object[capacity];
+        size = 0;
+    }
+</code></pre>
+<h3 id="获取方法">获取方法</h3>
+<pre><code>    /**
+     * 获取数组的大小
+     * @return
+     */
+    public int getSize(){
+        return size;
+    }
+
+    /**
+     * 获取数组的最大容量
+     * @return
+     */
+    public int getCapacity(){
+        return data.length;
+    }
+
+    /**
+     * 数组是否为空
+     * @return
+     */
+    public boolean isEmpty(){
+        return size==0;
+    }
+    
+    /**
+     * 获取指定位置元素
+     * @param index
+     * @return
+     */
+    public E get(int index){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        return data[index];
+    }
+
+    /**
+     * 更新指定位置的元素
+     * @param index
+     * @param e
+     */
+    public void set(int index, E e){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        data[index] = e;
+    }
+
+    /**
+     * 校验某个元素是否存在
+     * @param e
+     * @return
+     */
+    public boolean contains(E e){
+        for (int i = 0; i &lt; size; i++) {
+            if(data[i].equals(e)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 查找指定元素的索引
+     * @param e
+     * @return
+     */
+    public int find(E e){
+        for (int i = 0; i &lt; size; i++) {
+            if(data[i].equals(e)){
+                return i;
+            }
+        }
+        return -1;
+    }
+</code></pre>
+<h3 id="添加方法">添加方法</h3>
+<pre><code>    /**
+     * 向数组头添加一个元素
+     * @param e
+     */
+    public void addFirst(E e){
+        add(0, e);
+    }
+
+    /**
+     * 向数组末尾添加元素
+     * @param e
+     */
+    public void addLast(E e){
+        add(size, e);
+    }
+
+    /**
+     * 向指定位置插入元素
+     * @param index
+     * @param e
+     */
+    public void add(int index, E e){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        if(size == data.length){
+            resize(size * 2);
+        }
+        //把index位置后的每一个元素向后挪动一位
+        for (int i = size -1; i &gt;= index; i--) {
+            data[i+1] = data[i];
+        }
+
+        data[index] = e;
+        size ++;
+    }
+</code></pre>
+<h3 id="删除方法">删除方法</h3>
+<pre><code>    /**
+     * 删除第一个元素
+     * @return
+     */
+    public E removeFirst(){
+        return remove(0);
+    }
+
+    /**
+     * 删除最后一个元素
+     * @return
+     */
+    public E removeLast(){
+        return remove(size - 1);
+    }
+
+    /**
+     * 删除指定元素
+     * @param e
+     */
+    public boolean removeElement(E e){
+        int index = find(e);
+        if(index != -1){
+            remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除指定位置的元素
+     * @param index
+     * @return
+     */
+    public E remove(int index){
+        if(index &lt; 0 || index &gt; size){
+            throw new IllegalArgumentException(&quot;add 添加元素失败 === index不合法！&quot;);
+        }
+        E result = data[index];
+        //把index后的每一个元素 都向左移动一位
+        for (int i = index+1; i &lt; size ; i++) {
+            data[i-1] = data[i];
+        }
+        size --;
+        //loitering objects
+        data[size] = null;
+        if(size == data.length/2){
+            resize(data.length/2);
+        }
+        return result;
+    }
+</code></pre>
+<h3 id="扩容方法">扩容方法</h3>
+<pre><code>    /**
+     * 数组扩容 每次size * 2
+     * @param newCapacity
+     */
+    private void resize(int newCapacity){
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i &lt; size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Array{&quot; +
+                &quot;data=&quot; + Arrays.toString(data) +
+                &quot;, size=&quot; + size +
+                &quot;, capacity=&quot; + data.length +
+                '}';
+    }
+</code></pre>
+<h3 id="测试与源代码">测试与源代码</h3>
+<p><a href="https://github.com/weixiaojian/data-structure/blob/master/src/io/imwj/array/Array.java">源代码 Array.java</a><br>
+<a href="https://github.com/weixiaojian/data-structure/blob/master/src/io/imwj/array/ArrayMain.java">测试 ArrayMain.java</a></p>
+
+          
+          <p class="next-post">下一篇：
+            <a href="https://weixiaojian.github.io/post/mysql-zhong-case-when-shi-yong/">
+              <span class="post-title">
+                mysql中case when使用&rarr;
+              </span>
+            </a>
+          </p>
+        
+        <div class="comment">
+          
+        </div>
+      </div>
+    </div>
+  </article>
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+              <li class="list-inline-item">
+              <a href="https://weixiaojian.github.io/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>兰皋的博客</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://weixiaojian.github.io/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://weixiaojian.github.io/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  </body>
+</html>
+
